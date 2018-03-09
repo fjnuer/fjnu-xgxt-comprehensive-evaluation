@@ -22,7 +22,8 @@
 
 ## 其他  
 
-若不想安装油猴这类浏览器扩展，您还可以选择手动版本，详见 [此文件](other.txt)。
+1）若不想安装油猴这类浏览器扩展，您还可以选择手动版本，详见 [此文件](other.txt)。  
+2） [Gitee 备份地址](https://gitee.com/nn200433/codes/u5azcnlbkovtjh2e79gxw) by 猎隼丶止戈  
 
 ## 协议
 
