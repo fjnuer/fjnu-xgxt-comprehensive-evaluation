@@ -1,0 +1,50 @@
+/*
+使用说明：
+1）登录账号
+2）手动打开页面，【学生事务】 —— 【综合测评】 —— 【学生互评】
+3）确保【学年】那里选择本次要评测的学年
+4）然后就可以全选执行以下代码了
+5）完成后，请单击【查询】按钮查看更改后的结果
+*/
+
+function fjnuStudentEvaluation(yearid) {
+    var queryUrl = 'http://xgxt.fjnu.edu.cn/studentComprehensiveEvaluation/queryByStuStu2StuComprehensiveEvaluation.do';
+    $.post(queryUrl, {
+        'page': '1',
+        'rows': '100',
+        'comprehensiveEvaluationPlan.schoolYear.schoolYearId': yearid,
+        'isEvaluation': '0'
+    },
+    function(jsonStr) {
+        if (jsonStr.total <= 0) {
+            console.log('失败');
+        } else {
+            for (var index in jsonStr.rows) {
+                var fjnuScore = 80; // parseInt(Math.random() * 20 + 60, 10);
+                var fjnuSportsScore = 80; // parseInt(Math.random() * 20 + 60, 10);
+                var timeStamp = Date.now();
+                var saveUrl = 'http://xgxt.fjnu.edu.cn/studentComprehensiveEvaluation/saveByStuStu2StuComprehensiveEvaluation.do';
+                console.log(jsonStr.rows[index].studentName)
+                $.get(saveUrl, {
+                    paramStr : jsonStr.rows[index].stu2StuComprehensiveEvaluationId + ',' + fjnuScore + ',' + fjnuSportsScore + '^',
+                    _ : timeStamp
+                }, 
+                function(data){
+                    console.log( data.isSuccess ? 'success' : 'failed');
+                }, 
+                'json');
+            }
+        }
+    },
+    'json');
+}
+
+var yearid = $("input[class=combo-value]").last().val();
+fjnuStudentEvaluation(yearid);
+
+// 取消勾选“未评测”
+$("#isEvaluationSearch").attr("checked", false);
+
+// 显示 100，并更新列表
+$(".pagination-page-list").get(0).selectedIndex = 5;
+$(".pagination-page-list").trigger("change")
