@@ -16,6 +16,10 @@
 3）选择测评学年，例如 `2017-2018 学年`   
 4）选择“点此开始学生互评”，然后等待完成即可。  
 
+![截图](fjnuXgxtStudentComprehensiveEvaluation.png)
+
+![结果](result.png)
+
 ## 其他  
 
 若不想安装油猴这类浏览器扩展，您还可以选择手动版本，详见 [此文件](other.txt)。
